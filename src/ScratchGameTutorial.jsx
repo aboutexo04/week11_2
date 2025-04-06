@@ -4,17 +4,17 @@ const steps = [
   { 
     title: "Week 10 - Function art",
     description: "Today, we'll create art work using functions in Scratch!",
-    images: ["/images/first.png"]
+    images: ["images/first.png"] // Removed leading slash
   },
   {
     title: "Seating Chart",
     description: "Please check your seat and make sure you're in the right place.",
-    images: ["/images/seating-chart.png"]
+    images: ["images/seating-chart.png"] // Removed leading slash
   },
   {
     title: "Key programming concepts",
     description: "Today, we'll cover functions, very important concept in most programming languages.",
-    images: ["/images/functions.png"]
+    images: ["images/functions.png"] // Removed leading slash
   },
   
   {
@@ -24,26 +24,26 @@ const steps = [
   {
     title: "Step 2: Functions in Scratch",
     description: "As you can see, drawing starts with a space key, and it stops with a 'c' key.",
-    images: ["/images/basic.png"] 
+    images: ["images/basic.png"] // Removed leading slash
   },
   {
     title: "Step 2: Let's start coding with basic structure",
     description: "As you can see, drawing starts with a space key, and it stops with a 'c' key.",
-    images: ["/images/basic.png"] 
+    images: ["images/basic.png"] // Removed leading slash
   },
   {
     title: "Step 3: Defining function in Scratch",
     description: "In Scratch, we can define a function by clicking on 'Make a block' and give it a name. This allows us to create reusable code blocks that can be called multiple times.",
-    images: ["/images/makeablock.png","/images/blockname.png"]
+    images: ["images/makeablock.png", "images/blockname.png"] // Removed leading slashes
   },
   {
     title: "Step 4: Let's create one drawing function",
     description: "Let's create one drawing functions.",
-    images: ["/images/centered.png"]
+    images: ["images/centered.png"] // Removed leading slash
   },
   {
     title: "Step 5: Let's create one more drawing function to make our art more interesting",
-    images: ["/images/rotation.png"]
+    images: ["images/rotation.png"] // Removed leading slash
   },
   {
     title: "Step 6: Test your drawing and share the project to the studio week11",
@@ -54,6 +54,12 @@ const steps = [
 export default function ScratchGameTutorial() {
   const [stepIndex, setStepIndex] = useState(0);
   const step = steps[stepIndex];
+
+  // Function to handle image errors and provide fallback
+  const handleImageError = (e) => {
+    console.log("Image failed to load:", e.target.src);
+    e.target.src = "https://via.placeholder.com/400x300?text=Image+Not+Found";
+  };
 
   return (
     <div style={styles.container}>
@@ -73,6 +79,7 @@ export default function ScratchGameTutorial() {
                   src={`${import.meta.env.BASE_URL}${image}`}
                   alt={`${step.title} - image ${index + 1}`}
                   style={styles.image}
+                  onError={handleImageError}
                 />
               </div>
             ))}
